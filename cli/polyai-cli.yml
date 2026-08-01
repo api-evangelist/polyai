@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.poly.ai/adk/reference/cli
+docs: https://docs.poly.ai/extend/adk
+name: PolyAI ADK
+binary: poly
+description: >-
+  The PolyAI Agent Development Kit is a Python CLI that lets you build, edit and
+  deploy Agent Studio projects locally with a Git-like pull-edit-push workflow,
+  then push changes back to Agent Studio to review and deploy.
+install:
+- method: pypi
+  command: pip install polyai-adk
+package: packages/polyai-packages.yml
+commands:
+- {command: poly start, description: Create an account, access token and new project}
+- {command: poly init, description: Initialize a project}
+- {command: poly pull, description: Pull latest configuration from Agent Studio}
+- {command: poly push, description: Push local changes back to Agent Studio}
+- {command: poly status, description: View project status}
+references:
+- https://docs.poly.ai/adk/get-started/first-commands
+- https://docs.poly.ai/adk/reference/cli
+- https://docs.poly.ai/adk/concepts/working-locally

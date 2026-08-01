@@ -1,0 +1,65 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.poly.ai/api-reference/introduction
+docs:
+- https://docs.poly.ai/api-reference/introduction
+- https://docs.poly.ai/api-reference/error-codes
+- https://docs.poly.ai/api-reference/webhooks/introduction
+authentication:
+  style: api-key-header
+  header: x-api-key
+  detail: See authentication/polyai-authentication.yml
+regional_routing:
+  description: >-
+    Hosts are region-specific and MUST carry the region prefix; a bare
+    https://api.poly.ai returns an error. Runtime (Conversations) uses the
+    platform.polyai.app host; build/monitoring (Agents/Webhooks) uses the
+    poly.ai host.
+  hosts:
+  - {region: US, runtime: api.us-1.platform.polyai.app, build: api.us.poly.ai}
+  - {region: UK, runtime: api.uk-1.platform.polyai.app, build: api.uk.poly.ai}
+  - {region: EU, runtime: api.euw-1.platform.polyai.app, build: api.eu.poly.ai}
+  - {region: Studio, runtime: api.studio.poly.ai, build: api.studio.poly.ai}
+versioning:
+  scheme: uri-path
+  detail: >-
+    Only the Conversations API is versioned in the path (v3 recommended, v2
+    legacy, v1 sunsetting). Agents and Webhooks are unversioned. See
+    lifecycle/polyai-lifecycle.yml.
+error_envelope:
+  format: proprietary-json-envelope
+  detail: >-
+    NOT RFC 9457. Fields: success, error, error_id, error_code, error_message,
+    data. See errors/polyai-error-codes.yml.
+request_tracing:
+  correlation_header: X-PolyAI-Correlation-Id
+  detail: Returned on responses; surfaced as error_id on error envelopes.
+idempotency:
+  supported: partial
+  detail: >-
+    No general Idempotency-Key request header is documented. Some operations are
+    idempotent by design (e.g. publishing a deployment to an environment that is
+    already published returns 200 DEPLOYMENTS_ENVIRONMENT_ALREADY_PUBLISHED), and
+    audio-cache bulk delete is best-effort/retry-safe. No provider-wide
+    idempotency-key contract exists.
+webhooks:
+  signing: HMAC-SHA256
+  signed_message: '{timestamp}.{raw_request_body}'
+  headers: [X-PolyAI-Signature, X-PolyAI-Timestamp, X-PolyAI-Event-ID]
+  replay_window_minutes: 5
+  retry: exponential backoff, 6 attempts (~5.5h cumulative); retries on timeout/network/408/429/5xx, not other 4xx
+  max_endpoints_per_account: 10
+  detail: See asyncapi/polyai-webhooks.yml
+rate_limiting:
+  detail: >-
+    A 429 Too Many Requests is returned when limits are exceeded; the docs
+    instruct clients to respect the retry-after header delay. Specific numeric
+    limits are not published.
+media_types:
+  audio: audio/wav (audio-cache upload/download; 6 MB max)
+  multipart: multipart/form-data (audio + settings)
+cross_links:
+  errors: errors/polyai-error-codes.yml
+  authentication: authentication/polyai-authentication.yml
+  lifecycle: lifecycle/polyai-lifecycle.yml
+  webhooks: asyncapi/polyai-webhooks.yml

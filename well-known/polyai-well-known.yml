@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: searched
+notes: >-
+  Probed the standard /.well-known/ discovery surface on the marketing, docs and
+  API hosts. None served a well-known document (404/no-response). Recorded for
+  auditability; no WellKnown pointer wired into apis.yml since nothing was found.
+hosts:
+- host: https://docs.poly.ai
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://api.us.poly.ai
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://www.polyai.com
+  documents:
+  - {path: /.well-known/security.txt, status: 000, note: 'TLS certificate expired on marketing host'}

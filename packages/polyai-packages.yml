@@ -1,0 +1,20 @@
+generated: '2026-07-20'
+method: searched
+source: https://pypi.org/project/polyai-adk/
+notes: >-
+  PolyAI's public API is "no SDK required — pure REST." The one first-party
+  published client package is the Agent Development Kit (ADK), a Python CLI for
+  managing Agent Studio projects locally. Other PolyAI-LDN GitHub repos
+  (conversational-datasets, pheme, espeak-py, sevenrooms-api demo) are research
+  or example projects, not platform client SDKs.
+packages:
+- language: python
+  registry: pypi
+  name: polyai-adk
+  version: 0.34.5
+  url: https://pypi.org/project/polyai-adk/
+  install: pip install polyai-adk
+  license: Apache-2.0
+  summary: 'Agent Development Kit (ADK) — a CLI for managing Agent Studio projects locally'
+  provides_cli: poly
+  official: true

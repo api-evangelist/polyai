@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.poly.ai/api-reference/introduction
+versioning:
+  scheme: uri-path
+  detail: >-
+    Only the Conversations API is versioned. Agents and Webhooks & Alerts are
+    unversioned.
+  versions:
+  - {version: v3, status: recommended, notes: 'Event-sourced, scalable schema with latency and translation fields'}
+  - {version: v2, status: legacy, notes: 'Same schema, older auth model'}
+  - {version: v1, status: sunsetting, notes: 'Best-effort until 2026-03-02; unsupported from 2026-08-31'}
+deprecation:
+  policy: >-
+    Conversations API v1 is being sunset — best-effort support until 2026-03-02
+    and fully unsupported from 2026-08-31; v3 is the recommended migration target.
+  sunset_dates:
+  - {version: v1, best_effort_until: '2026-03-02', unsupported_from: '2026-08-31'}
+sla:
+  uptime_target: '99.994%'
+  basis: trailing 12 months, production
+  source: https://docs.poly.ai/api-reference/introduction
+status_page: null
+languages_supported: '24+'
+regions: [US, UK, EU, Studio]
+data_retention:
+  outbound_call_status: '~2 hours after the call ends'

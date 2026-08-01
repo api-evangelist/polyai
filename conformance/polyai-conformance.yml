@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.poly.ai/legal/compliance
+compliance_program:
+  url: https://docs.poly.ai/legal/compliance
+  certifications:
+  - {name: ISO/IEC 27001, scope: Information security management system}
+  - {name: SOC 2 Type II, scope: 'Security, availability, processing integrity, confidentiality, privacy'}
+  - {name: HIPAA, scope: 'Protected health information (where relevant)'}
+  - {name: PCI-DSS, scope: 'Payment card data (where relevant)'}
+  - {name: Cyber Essentials, scope: UK NCSC baseline security}
+  - {name: Cyber Essentials Plus, scope: UK NCSC audited security}
+  - {name: GDPR, scope: EU personal-data protection}
+standards:
+- {id: oauth2, conforms: false, evidence: 'API-key header auth only (x-api-key); no OAuth2 flow documented'}
+- {id: oidc, conforms: false}
+- {id: rfc9457-problem-details, conforms: false, evidence: 'Proprietary error envelope (success/error_code/error_message/data), not application/problem+json'}
+- {id: rfc9116-security-txt, conforms: false, evidence: 'No /.well-known/security.txt served on probed hosts'}
+- {id: hmac-webhook-signing, conforms: true, evidence: 'HMAC-SHA256 X-PolyAI-Signature over {timestamp}.{body}'}
+- {id: e164-phone-numbers, conforms: true, evidence: 'Phone numbers validated as E.164 (PHONE_NUMBERS_INVALID_PHONE_NUMBER_FORMAT)'}
+- {id: iso27001, conforms: true, evidence: 'Published on legal/compliance page'}
+- {id: soc2-type2, conforms: true, evidence: 'Published on legal/compliance page'}
+- {id: hipaa, conforms: true, evidence: 'Published on legal/compliance page (where relevant)'}
+- {id: pci-dss, conforms: true, evidence: 'Published on legal/compliance page (where relevant)'}
+- {id: gdpr, conforms: true, evidence: 'Published on legal/compliance page'}

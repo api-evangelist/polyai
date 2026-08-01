@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.poly.ai/api-reference/introduction
+docs: https://docs.poly.ai/api-reference/introduction
+summary:
+  types: [apiKey]
+  api_key_in: [header]
+  oauth2_flows: []
+  notes: >-
+    All PolyAI Platform APIs use header-based API-key authentication. There is no
+    OAuth2/OIDC flow. Keys are region- and scope-specific (workspace-scoped for
+    Agents, project-scoped for Conversations) and must be created in the Agent
+    Studio "API Keys" tab. Runtime and build keys are separate. The Messaging
+    (WebSocket) API additionally exchanges a connector token for a short-lived
+    access token before opening a session.
+schemes:
+- name: apiKeyHeader
+  type: apiKey
+  in: header
+  parameter_name: x-api-key
+  description: >-
+    Region- and scope-provisioned API key. Sent on every request as the x-api-key
+    header. Treat keys as secrets; never commit or embed in client-side code.
+  sources: [https://docs.poly.ai/api-reference/introduction]
+key_scopes:
+- {scope: workspace, used_by: Agents API, direction: write}
+- {scope: project, used_by: Conversations API, direction: read}
+- {scope: runtime, used_by: runtime conversation/chat surfaces}
+- {scope: build, used_by: agent build/monitoring surfaces}
+messaging_token_exchange:
+  description: >-
+    The Messaging (WebSocket) API exchanges a connector token for a short-lived
+    access token, then creates a session before events flow.
+  source: https://docs.poly.ai/api-reference/messaging/sessions
+correlation:
+  response_header: X-PolyAI-Correlation-Id
+  description: Correlation/request id echoed on responses and surfaced as error_id on errors.

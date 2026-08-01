@@ -1,0 +1,121 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.poly.ai/api-reference/error-codes
+format: proprietary-envelope
+notes: >-
+  PolyAI does NOT use RFC 9457 problem+json. Errors return a JSON envelope with
+  fields: success (always false), error (human message), error_id (from the
+  X-PolyAI-Correlation-Id response header), error_code (UPPER_SNAKE_CASE
+  machine code), error_message (human description), data (always null).
+envelope:
+  fields:
+  - name: success
+    value: 'false on error'
+  - name: error
+    description: Human-readable message
+  - name: error_id
+    description: Unique request identifier, echoes X-PolyAI-Correlation-Id header
+  - name: error_code
+    description: Machine-readable code in UPPER_SNAKE_CASE
+  - name: error_message
+    description: Human-readable description
+  - name: data
+    value: 'null on error'
+http_status_codes:
+- {status: 400, meaning: Bad request, remediation: Validate request body and query parameters}
+- {status: 401, meaning: Unauthorized, remediation: Verify API key presence and validity}
+- {status: 403, meaning: Forbidden, remediation: Confirm user permissions for the action}
+- {status: 404, meaning: Not found, remediation: Check resource ID exists and region is correct}
+- {status: 405, meaning: Method not allowed, remediation: Use correct HTTP verb for endpoint}
+- {status: 408, meaning: Request timeout, remediation: Retry; reduce payload complexity if recurring}
+- {status: 409, meaning: Conflict, remediation: Use different identifier; check for duplicates}
+- {status: 410, meaning: Gone, remediation: Resource permanently deleted; cannot recover}
+- {status: 412, meaning: Precondition failed, remediation: Deploy to pre-release environment first}
+- {status: 415, meaning: Unsupported media type, remediation: Upload supported file type only}
+- {status: 422, meaning: Unprocessable entity, remediation: Fix semantic errors (e.g. CSV schema mismatch)}
+- {status: 429, meaning: Too many requests, remediation: Respect rate limits; retry after header delay}
+- {status: 500, meaning: Internal server error, remediation: Retry or contact support}
+- {status: 501, meaning: Not implemented, remediation: Feature unavailable; check roadmap}
+- {status: 502, meaning: Bad gateway, remediation: Upstream service error; retry}
+- {status: 503, meaning: Service unavailable, remediation: Temporary outage; retry later}
+platform_error_codes:
+  authentication_authorization:
+  - {code: AUTH_USER_NOT_FOUND, id: 3001, status: 401, meaning: User missing from system}
+  - {code: AUTH_USER_UNAUTHORISED, id: 3002, status: 401, meaning: Invalid credentials or expired session}
+  - {code: AUTH_USER_INVALID_TOKEN, id: 3003, status: 401, meaning: Malformed, expired, or revoked token}
+  - {code: USER_ACCESS_FORBIDDEN, id: 2, status: 403, meaning: Insufficient user permissions}
+  - {code: EXTERNAL_USER_FORBIDDEN, id: 3, status: 403, meaning: External user privilege too low}
+  - {code: ACCOUNT_INSUFFICIENT_PERMISSIONS, id: 1003, status: 403, meaning: Account operation denied}
+  conversations:
+  - {code: CONVERSATIONS_NOT_FOUND, id: 5001, status: 404, meaning: Conversation ID missing}
+  - {code: CONVERSATIONS_VALIDATION_FAILED, id: 5002, status: 400, meaning: Request body invalid}
+  - {code: CONVERSATIONS_RECORDING_NOT_FOUND, id: 5003, status: 404, meaning: Audio recording unavailable}
+  - {code: GET_CONVERSATIONS_FILTER_PARSE_ERROR, status: 400, meaning: Filter syntax invalid}
+  - {code: GET_CONVERSATIONS_INVALID_SORT_PARAMETER, status: 400, meaning: Sort field not allowed}
+  chat:
+  - {code: CHAT_DRAFT_NOT_EXIST, id: 4001, status: 400, meaning: Draft unavailable}
+  - {code: CHAT_TIMEOUT, id: 4002, status: 400, meaning: Session exceeded timeout}
+  - {code: CHAT_DRAFT_DEPLOYMENT_FAILED, id: 4003, status: 500, meaning: Auto-deploy failed}
+  - {code: ChatConversationEnded, status: 410, meaning: Message sent to ended conversation}
+  deployments:
+  - {code: DEPLOYMENT_NOT_FOUND, id: 6001, status: 404, meaning: Deployment ID missing}
+  - {code: DEPLOYMENTS_ALREADY_PUBLISHED, id: 6009, status: 409, meaning: Already in target environment}
+  - {code: DEPLOYMENTS_ENVIRONMENT_ALREADY_PUBLISHED, id: 6002, status: 200, meaning: Idempotent duplicate}
+  - {code: DEPLOYMENTS_VALIDATION_FAILED, id: 6007, status: 400, meaning: Request validation failed}
+  - {code: DEPLOYMENTS_INVALID_ENVIRONMENT, id: 6008, status: 400, meaning: Invalid environment parameter}
+  - {code: ErrPreReleaseNotReady, status: 412, meaning: Deploy to pre-release before live}
+  flows:
+  - {code: FLOW_NOT_FOUND, id: 8001, status: 404, meaning: Flow ID missing}
+  - {code: FLOWS_NAME_ALREADY_EXISTS, id: 8003, status: 409, meaning: Duplicate flow name}
+  - {code: FLOWS_FUNCTION_NAME_ALREADY_EXISTS, id: 8004, status: 409, meaning: Duplicate function in flow}
+  - {code: FLOWS_RESERVED_PARAMETER_NAME, id: 8005, status: 400, meaning: Reserved name used}
+  - {code: FLOWS_RESERVED_FUNCTION_NAME, id: 8006, status: 400, meaning: Reserved name used}
+  functions:
+  - {code: FUNCTION_NOT_FOUND, id: 9001, status: 404, meaning: Function ID missing}
+  - {code: FUNCTIONS_DEPLOYMENT_HAS_ERRORS, id: 9004, status: 400, meaning: Code has deployment errors}
+  - {code: FUNCTION_EXECUTION_FAILED, id: 9006, status: 400, meaning: Runtime execution error}
+  - {code: FUNCTION_FAILED_TO_PARSE, id: 9007, status: 400, meaning: Parse errors in source}
+  - {code: FUNCTION_NAME_ALREADY_EXISTS, id: 9009, status: 409, meaning: Duplicate function name}
+  - {code: FUNCTIONS_RESERVED_NAME, id: 9010, status: 400, meaning: System-reserved name}
+  knowledge_base:
+  - {code: KNOWLEDGE_BASE_TOPIC_ALREADY_EXISTS, id: 11001, status: 409, meaning: Duplicate topic name}
+  - {code: KNOWLEDGE_BASE_IMPORT_NO_CSV_FOUND, id: 11002, status: 400, meaning: CSV file missing}
+  - {code: KNOWLEDGE_BASE_IMPORT_INVALID_TYPE, id: 11003, status: 415, meaning: File type unsupported}
+  - {code: KNOWLEDGE_BASE_IMPORT_MISSING_COLUMNS, id: 11004, status: 400, meaning: Required CSV columns absent}
+  - {code: KNOWLEDGE_BASE_TOPICS_INVALID, id: 11005, status: 400, meaning: Topic data validation failed}
+  - {code: KNOWLEDGE_BASE_RICH_TEXT_INVALID, id: 11006, status: 400, meaning: Malformed markup}
+  phone_numbers_connectors:
+  - {code: PHONE_NUMBERS_NOT_FOUND, id: 14006, status: 404, meaning: Phone number missing}
+  - {code: PHONE_NUMBERS_ALREADY_EXISTS, id: 14007, status: 409, meaning: Number already imported}
+  - {code: PHONE_NUMBERS_INVALID_PHONE_NUMBER_FORMAT, id: 14003, status: 400, meaning: Not E.164 format}
+  - {code: PHONE_NUMBERS_CONNECTOR_DOES_NOT_EXIST, id: 14005, status: 404, meaning: Connector missing}
+  - {code: CONNECTORS_NOT_FOUND, id: 14100, status: 404, meaning: Connector ID missing}
+  - {code: CONNECTORS_VALIDATION_FAILED, id: 14101, status: 400, meaning: Request validation failed}
+  variants:
+  - {code: VARIANTS_BAD_ATTRIBUTES_ERROR, id: 26001, status: 400, meaning: Attribute schema mismatch}
+  - {code: VARIANTS_DUPLICATE_NAME_ERROR, id: 26002, status: 409, meaning: Duplicate variant name}
+  - {code: VARIANTS_REMOVE_DEFAULT_ERROR, id: 26003, status: 400, meaning: Cannot remove default}
+  - {code: VariantsImportInvalidDelimiter, status: 400, meaning: CSV delimiter unrecognized}
+  - {code: VariantImportMissingColumnsHttp, status: 400, meaning: CSV columns missing}
+  - {code: VariantImportDuplicateColumnsHttp, status: 400, meaning: Duplicate CSV headers}
+  real_time_config:
+  - {code: REAL_TIME_CONFIG_FORBIDDEN_ACCESS, id: 29001, status: 403, meaning: Access denied}
+  - {code: REAL_TIME_CONFIG_INVALID_FOR_SCHEMA, id: 29002, status: 400, meaning: JSON Schema validation failed}
+  - {code: REAL_TIME_CONFIG_INVALID_SCHEMA, id: 29004, status: 400, meaning: Schema definition invalid}
+  - {code: REAL_TIME_CONFIG_UNKNOWN_CLIENT_ENVIRONMENT, id: 29006, status: 400, meaning: Environment not recognized}
+  accounts_projects:
+  - {code: ACCOUNT_NOT_FOUND, id: 1002, status: 404, meaning: Account ID missing}
+  - {code: ACCOUNT_CREATE_INVALID_ID, id: 1004, status: 400, meaning: ID format invalid}
+  - {code: ACCOUNT_CREATE_EXISTING_ID, id: 1006, status: 409, meaning: ID already taken}
+  - {code: PROJECT_NOT_FOUND, id: 15001, status: 404, meaning: Project ID missing}
+  - {code: PROJECT_ID_ALREADY_EXISTS, id: 15005, status: 409, meaning: ID already taken}
+  - {code: PROJECT_ID_INVALID, id: 15006, status: 400, meaning: ID format invalid}
+  sms:
+  - {code: SMS_TEMPLATE_NOT_FOUND, id: 20001, status: 404, meaning: Template ID missing}
+  test_suite:
+  - {code: MissingTestCasesHttp, status: 422, meaning: One or more test case IDs not found}
+  - {code: NoTestCasesHttp, status: 422, meaning: No test cases exist}
+websocket_close_codes:
+- {code: 1000, meaning: Normal closure}
+- {code: 1006, meaning: Abnormal closure (network failure)}
+- {code: 408, meaning: Pong timeout (no response within configured interval)}

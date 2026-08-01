@@ -1,0 +1,33 @@
+generated: '2026-07-20'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.polyai.com
+  https: true
+  tls_cert_error: '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has
+    expired (_ssl.c:1082)'
+  hsts: null
+- host: docs.poly.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 23 18:22:32 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+- host: api.us.poly.ai
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Sep 19 23:59:59 2026 GMT
+  hsts: null
+domains:
+- domain: polyai.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: poly.ai
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

@@ -1,7 +1,30 @@
 aid: polyai
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/polyai.png
 name: Polyai
-description: Polyai is a company surfaced as a portfolio company of khosla-ventures and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  PolyAI builds enterprise-grade voice and chat AI agents that handle real
+  customer service conversations across 24+ languages, with 99.994% production
+  uptime. The PolyAI Platform exposes three REST API families — an Agents API to
+  create, branch, configure and deploy agents through environments; a
+  Conversations API to retrieve transcripts, audio, metrics and session data;
+  and a Webhooks & Alerts surface for real-time event notifications — plus Chat,
+  SMS, Outbound Calling, Handoff, DNI, External Events, Messaging (WebSocket) and
+  a WebRTC Gateway. Authentication is header-based (x-api-key) with region-scoped
+  keys, and a Python Agent Development Kit (ADK) offers a Git-like local
+  build-pull-push workflow. Backed by Khosla Ventures and profiled in the API
+  Evangelist network.
 url: https://raw.githubusercontent.com/api-evangelist/polyai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,10 +34,37 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Conversational AI
+- Voice AI
+- Customer Service
+- Contact Center
+- Agents
+- Speech Recognition
+- Text to Speech
+- Webhooks
+- Enterprise
+apis:
+- name: PolyAI Platform API
+  description: >-
+    Build, run and observe PolyAI voice and chat agents from your own systems.
+    Three REST API families (Agents, Conversations, Webhooks & Alerts) plus Chat,
+    SMS, Outbound Calling, Handoff, DNI, External Events, Messaging (WebSocket)
+    and WebRTC Gateway. Header auth via x-api-key with region-scoped keys.
+  humanURL: https://docs.poly.ai/api-reference/introduction
+  baseURL: https://api.us.poly.ai
+  tags:
+  - Conversational AI
+  - Voice AI
+  - Agents
+  - Webhooks
+  properties:
+  - type: Documentation
+    url: https://docs.poly.ai/api-reference/introduction
+  - type: GettingStarted
+    url: https://docs.poly.ai/api-reference/quickstart
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +73,42 @@ maintainers:
 common:
 - type: Website
   url: https://www.polyai.com/
+- type: DeveloperPortal
+  url: https://docs.poly.ai/
+- type: Documentation
+  url: https://docs.poly.ai/api-reference/introduction
+- type: APIReference
+  url: https://docs.poly.ai/api-reference/introduction
+- type: GettingStarted
+  url: https://docs.poly.ai/api-reference/quickstart
+- type: GitHubOrganization
+  url: https://github.com/PolyAI-LDN
+- type: Compliance
+  url: https://docs.poly.ai/legal/compliance
+- type: LLMsTxt
+  url: llms/polyai-llms.txt
+- type: ErrorCatalog
+  url: errors/polyai-error-codes.yml
+- type: Authentication
+  url: authentication/polyai-authentication.yml
+- type: Conventions
+  url: conventions/polyai-conventions.yml
+- type: Lifecycle
+  url: lifecycle/polyai-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/polyai-lifecycle.yml
+- type: Webhooks
+  url: asyncapi/polyai-webhooks.yml
+- type: Packages
+  url: packages/polyai-packages.yml
+- type: CLI
+  url: cli/polyai-cli.yml
+- type: Conformance
+  url: conformance/polyai-conformance.yml
+- type: DomainSecurity
+  url: security/polyai-domain-security.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 10
+  pass: local-v1

@@ -1,0 +1,58 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.poly.ai/api-reference/webhooks/introduction
+spec_type: Webhooks
+summary: >-
+  PolyAI exposes two real-time event surfaces: HTTP webhooks for alert lifecycle
+  events (registered/managed via the Webhooks API), and a Messaging WebSocket API
+  that streams bidirectional conversation events. No published AsyncAPI document
+  was found; this is the captured event/webhook catalog.
+webhooks:
+  registration:
+    api: https://docs.poly.ai/api-reference/webhooks/introduction
+    auth: x-api-key header
+    max_endpoints_per_account: 10
+    over_limit_error: 409 Conflict
+    operations:
+    - create-webhook-endpoint
+    - get-webhook-endpoint
+    - list-webhook-endpoints
+    - update-webhook-endpoint
+    - delete-webhook-endpoint
+    - rotate-webhook-signing-secret
+  signing:
+    algorithm: HMAC-SHA256
+    signed_message: '{timestamp}.{raw_request_body}'
+    headers:
+    - {name: X-PolyAI-Signature, purpose: HMAC-SHA256 signature for verification}
+    - {name: X-PolyAI-Timestamp, purpose: Unix timestamp the webhook was sent}
+    - {name: X-PolyAI-Event-ID, purpose: Unique id for deduplication}
+    replay_window_minutes: 5
+    verification: constant-time comparison recommended
+  delivery:
+    retry: exponential backoff, 6 attempts (~5.5h cumulative)
+    retry_on: [timeout, network-error, 408, 429, 5xx]
+    no_retry_on: [other 4xx]
+  events:
+  - {name: alerts.triggered, description: An alert rule transitioned into a firing state}
+  - {name: alerts.resolved, description: A firing alert transitioned back to ok}
+messaging_websocket:
+  api: https://docs.poly.ai/api-reference/messaging/introduction
+  transport: WebSocket
+  description: >-
+    Real-time text conversation events with streaming agent responses and live
+    handoff. Sessions use a short-lived access token exchanged from a connector
+    token.
+  event_catalog:
+  - https://docs.poly.ai/api-reference/messaging/events
+  - https://docs.poly.ai/api-reference/messaging/events-receive
+  - https://docs.poly.ai/api-reference/messaging/events-send
+  - https://docs.poly.ai/api-reference/messaging/lifecycle
+  - https://docs.poly.ai/api-reference/messaging/streaming
+  features: [streaming-chunks, handoff-to-live-agent, session-lifecycle, reconnect-keepalive]
+external_events:
+  api: https://docs.poly.ai/api-reference/external-events/introduction
+  description: >-
+    External providers POST results (payments, bookings, verifications) back into
+    active conversations asynchronously; PolyAI binds the data to the active
+    conversation and optionally feeds it to the LLM.
