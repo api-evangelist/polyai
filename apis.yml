@@ -43,6 +43,17 @@ tags:
 - Contact Center
 - Agents
 - Speech Recognition
+- Text-to-Speech
+- Webhook
+- Enterprise
+tags_raw:
+- Company
+- Conversational AI
+- Voice AI
+- Customer Service
+- Contact Center
+- Agents
+- Speech Recognition
 - Text to Speech
 - Webhooks
 - Enterprise
@@ -56,6 +67,11 @@ apis:
   humanURL: https://docs.poly.ai/api-reference/introduction
   baseURL: https://api.us.poly.ai
   tags:
+  - Conversational AI
+  - Voice AI
+  - Agents
+  - Webhook
+  tags_raw:
   - Conversational AI
   - Voice AI
   - Agents
